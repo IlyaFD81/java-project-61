@@ -14,24 +14,24 @@ public class App {
         Scanner playerChoice = new Scanner(System.in, UTF_8);
         String actualChoice = playerChoice.nextLine();
         boolean sucessGame = false;
+        boolean exitChoice = false;
         String playerName = "Player";
         switch (actualChoice) {
-            case "1":
-                playerName = Cli.greeting();
-                break;
-            case "2":
+            case "1" -> playerName = Cli.greeting();
+            case "2" -> {
                 playerName = Cli.greeting();
                 sucessGame = Games.startEven();
-                break;
-            case "0":
-                break;
-            default:
-                System.out.println("Wrong choice");
-                break;
+            }
+            case "0" -> {
+                exitChoice = true;
+                sucessGame = true;
+            }
+            default -> System.out.println("Wrong choice");
         }
         if (sucessGame) {
-            System.out.println("Congratulations, " + playerName + "!");
-        } else {
+            System.out.print(exitChoice ? "Goodbye, " : "Congratulations, ");
+            System.out.println(playerName + "!");
+        } else if (!actualChoice.equals("1"))  {
             System.out.println("Try again, " + playerName + "!");
         }
     }
